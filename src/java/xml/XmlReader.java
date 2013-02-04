@@ -15,7 +15,7 @@ public class XmlReader extends DefaultHandler implements Runnable
 
     private ExchangeRates er;
     private List<SingleExchangeRate> serList = new ArrayList();
-    ;
+    
     private String refcur = "DKK";
     private String dato;
     private final CurrencyHandler hand = new CurrencyHandler();
@@ -77,7 +77,7 @@ public class XmlReader extends DefaultHandler implements Runnable
             }
         }
 //        System.out.println("SER: " + ser.getCurrencyCode() + ser.getDesc() + ser.getRate());
-        serList.add(ser);
+        serList.add(ser); 
 //                System.out.println("jeg er i currency: " + attributes.getValue(0)+ attributes.getValue(1)+ attributes.getValue(2));
 
 //                System.out.print("[Atribute: NAME: " + attributes.getLocalName(i) + " VALUE: " + attributes.getValue(i) + "] ");
