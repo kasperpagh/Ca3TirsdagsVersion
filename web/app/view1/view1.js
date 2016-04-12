@@ -27,6 +27,9 @@ angular.module('myApp.view1', ['ngRoute'])
                     {
                         console.log("Du er nu oprettet!");
                         $scope.youAreAUser = true;
+                    }).error(function()
+                    {
+                        $("#status").html("<h3>DER ER SKET EN FEJL, PRØV IGEN!</h3>");
                     });
                 };
             }]);

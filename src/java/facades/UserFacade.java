@@ -87,7 +87,7 @@ public class UserFacade implements IUserFacade
             em.persist(newUsr);
             em.getTransaction().commit();
         }
-        catch (PasswordStorage.CannotPerformOperationException ex)
+        catch (PasswordStorage.CannotPerformOperationException |org.eclipse.persistence.exceptions.DatabaseException ex )
         {
             Logger.getLogger(UserFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
