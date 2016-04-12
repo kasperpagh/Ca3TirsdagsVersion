@@ -25,7 +25,7 @@ public class User implements Serializable, IUser {
   @JoinTable(name = "SystemUser_USERROLE", joinColumns = {
   @JoinColumn(name = "userName", referencedColumnName = "userName")}, inverseJoinColumns = {
   @JoinColumn(name = "roleName")})
-  private List<Role> roles = new ArrayList();
+  final private List<Role> roles = new ArrayList();
 
   public User() {
   }

@@ -16,6 +16,13 @@
   <p><span style="font-weight: bold">TESTING: </span><em>See testFilters.js</em> in the Unit Test Folder for an example of how to test a filter</p>
 </div>
 <div>
+    <h2><u>Opret bruger her!</u></h2>
+    <input type="text" id="desiredUsername" placeholder="Skriv dit ønskede usrname her">
+    <input type="password" id="desiredPassword" placeholder="Skriv dit ønskede password her">
+    <button ng-click="ctrl.makeUser()">Opret bruger</button>
+    <h3>er du oprettet? {{ctrl.youAreAUser | checkmark}}</h3>
+</div>
+<div>
   <h2>Factory + Service Demo</h2>
   <p>This message is fetched from a factory: <span style="font-weight: bold"> {{ctrl.msgFromFactory}}</span></p>
   <p>This message is fetched from a Service: <span style="font-weight: bold"> {{ctrl.msgFromService}}</span></p>
