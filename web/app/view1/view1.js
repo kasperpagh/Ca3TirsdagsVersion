@@ -10,10 +10,10 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
 
-        .controller('View1Ctrl',  ["InfoFactory", "InfoService","$http", function (InfoFactory, InfoService,$http) {
+        .controller('View1Ctrl',  ["InfoFactory", "InfoService","$http", "$scope", function (InfoFactory, InfoService,$http,$scope) {
                 this.msgFromFactory = InfoFactory.getInfo();
                 this.msgFromService = InfoService.getInfo();
-                this.youAreAUser = false;
+                $scope.youAreAUser = false;
                 this.makeUser = function ()
                 {
                     
@@ -25,7 +25,8 @@ angular.module('myApp.view1', ['ngRoute'])
 
                     $http.post("/SemesterSeed/api/demouser", this.dataToSend).success(function (data)
                     {
-                        this.youAreAUser = true;
+                        console.log("Du er nu oprettet!");
+                        $scope.youAreAUser = true;
                     });
                 };
             }]);
