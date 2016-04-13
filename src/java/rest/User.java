@@ -2,9 +2,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import facades.UserFacade;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -36,6 +38,9 @@ public class User
     {
         return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
     }
+    
+    
+  
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
