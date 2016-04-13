@@ -26,7 +26,7 @@ app.controller('View3Ctrl', function ($scope, $http)
                 $scope.prodvalues = Object.valueOf()($scope.productionunits[1]);
 
 
-                $scope.all = [{ key: $scope.keys, prodValue: $scope.prodvalues}];
+ 
 
             }, function (response) {
                 console.log(response.data);
