@@ -20,16 +20,6 @@ app.controller('View3Ctrl', function ($scope, $http)
                 $scope.productionunits = response.data.productionunits;
 
 
-                $scope.keys = [];
-                $scope.keys = Object.keys($scope.productionunits[1]);
-                $scope.prodvalues = [];
-                $scope.prodvalues = Object.valueOf()($scope.productionunits[1]);
-
-
- 
-
-            }, function (response) {
-                console.log(response.data);
 
             });
 
