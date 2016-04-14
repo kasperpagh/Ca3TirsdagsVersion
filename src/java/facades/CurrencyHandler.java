@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package facades;
 
+import entity.ExchangeRates;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,13 +19,15 @@ import javax.persistence.Persistence;
  *
  * @author kaspe
  */
-public class Handler
+public class CurrencyHandler
 {
 
+    static ExchangeRates dailyRates;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
 
-    public void persist(ExchangeRates er)
+    public void persistExchangeRates(ExchangeRates er)
     {
+        dailyRates = er;
         EntityManager em = emf.createEntityManager();
         try
         {

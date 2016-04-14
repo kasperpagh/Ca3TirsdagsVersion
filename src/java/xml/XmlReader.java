@@ -1,7 +1,7 @@
 package xml;
 
 import entity.ExchangeRates;
-import entity.Handler;
+import facades.CurrencyHandler;
 import entity.SingleExchangeRate;
 import java.io.IOException;
 import org.xml.sax.*;
@@ -18,7 +18,7 @@ public class XmlReader extends DefaultHandler implements Runnable
     private List<SingleExchangeRate> serList;
     private String refcur = "DKK";
     private String dato;
-    private Handler hand = new Handler();
+    private CurrencyHandler hand = new CurrencyHandler();
 
     public XmlReader()
     {
@@ -36,7 +36,7 @@ public class XmlReader extends DefaultHandler implements Runnable
     {
         System.out.println("HER ER SER:" + serList.toString());
         er = new ExchangeRates(dato, refcur, serList);
-        hand.persist(er);
+        hand.persistExchangeRates(er);
         System.out.println("End Document (Sax-event)");
     }
 
@@ -69,22 +69,7 @@ public class XmlReader extends DefaultHandler implements Runnable
 
         System.out.println("");
     }
-//
-//    public static void main(String[] argv)
-//    {
-//        try
-//        {
-//            XMLReader xr = XMLReaderFactory.createXMLReader();
-//            xr.setContentHandler(new XmlReader());
-//            URL url = new URL("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=en");
-//            xr.parse(new InputSource(url.openStream()));
-//        }
-//        catch (SAXException | IOException e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-
+    
     @Override
     public void run()
     {

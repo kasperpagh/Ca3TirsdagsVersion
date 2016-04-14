@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class BackgroundJobManager implements ServletContextListener
 {
-
     private ScheduledExecutorService scheduler;
     private XmlReader xr;
 
