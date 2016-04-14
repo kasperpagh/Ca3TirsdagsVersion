@@ -15,6 +15,12 @@ app.controller('View3Ctrl', function ($scope, $http)
     $scope.oneAtATime = true;
 
 
+                $scope.firmName = response.data.name;
+                $scope.firm = response.data;
+
+                $scope.productionunits = response.data.productionunits;
+
+
           $http({
             method: 'GET',
             url: 'api/demouser'
@@ -26,6 +32,7 @@ app.controller('View3Ctrl', function ($scope, $http)
 
     $scope.getfromapi = function () {
         
+
 
   
 
@@ -48,7 +55,22 @@ app.controller('View3Ctrl', function ($scope, $http)
 
 
 
+
 });
 
 
+app.filter('myFilter', function () {
+
+    return function (obj) {
+            var a = {};
+        angular.forEach(obj, function(value, key) {
+            if (key !== "productionunits") {
+                a[key] = value;
+            }
+            });
+            return a;
+         
+         
+    };
+});
 
