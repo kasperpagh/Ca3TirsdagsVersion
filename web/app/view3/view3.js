@@ -15,11 +15,6 @@ app.controller('View3Ctrl', function ($scope, $http)
     $scope.oneAtATime = true;
 
 
-                $scope.firmName = response.data.name;
-                $scope.firm = response.data;
-
-                $scope.productionunits = response.data.productionunits;
-
 
           $http({
             method: 'GET',
