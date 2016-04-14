@@ -17,7 +17,11 @@ app.controller('View3Ctrl', function ($scope, $http)
         skipAuthorization: true})
             .then(function (response) {
 
+                $scope.firmName = response.data.name;
+                $scope.firm = response.data;
+                console.log($scope.firmName);
                 $scope.productionunits = response.data.productionunits;
+
 
 
 
@@ -27,3 +31,17 @@ app.controller('View3Ctrl', function ($scope, $http)
 
 });
 
+app.filter('myFilter', function () {
+
+    return function (obj) {
+            var a = {};
+        angular.forEach(obj, function(value, key) {
+            if (key !== "productionunits") {
+                a[key] = value;
+            }
+            });
+            return a;
+         
+         
+    };
+});
