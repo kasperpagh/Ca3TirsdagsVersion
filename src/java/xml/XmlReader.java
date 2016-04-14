@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class XmlReader extends DefaultHandler
+public class XmlReader extends DefaultHandler implements Runnable
 {
 
     private ExchangeRates er;
@@ -19,6 +19,7 @@ public class XmlReader extends DefaultHandler
     private String refcur = "DKK";
     private String dato;
     private Handler hand = new Handler();
+
     public XmlReader()
     {
     }
@@ -34,7 +35,7 @@ public class XmlReader extends DefaultHandler
     public void endDocument() throws SAXException
     {
         System.out.println("HER ER SER:" + serList.toString());
-        er = new ExchangeRates(dato,refcur,serList);
+        er = new ExchangeRates(dato, refcur, serList);
         hand.persist(er);
         System.out.println("End Document (Sax-event)");
     }
@@ -42,18 +43,17 @@ public class XmlReader extends DefaultHandler
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
     {
-        
 
         System.out.print("Element: " + localName + ": ");
         for (int i = 0; i < attributes.getLength(); i++)
         {
-            if(attributes.getLocalName(i).equalsIgnoreCase("id"))
+            if (attributes.getLocalName(i).equalsIgnoreCase("id"))
             {
                 System.out.println("jeg er i dato");
                 dato = attributes.getValue(i);
-                 System.out.println("her er dato: " +dato);
+                System.out.println("her er dato: " + dato);
             }
-             if(attributes.getLocalName(i).equalsIgnoreCase("refcur"))
+            if (attributes.getLocalName(i).equalsIgnoreCase("refcur"))
             {
                 System.out.println("jeg er i ref");
                 refcur = attributes.getValue(i);
@@ -66,14 +66,31 @@ public class XmlReader extends DefaultHandler
                 System.out.print("[Atribute: NAME: " + attributes.getLocalName(i) + " VALUE: " + attributes.getValue(i) + "] ");
             }
         }
-        
+
         System.out.println("");
     }
+//
+//    public static void main(String[] argv)
+//    {
+//        try
+//        {
+//            XMLReader xr = XMLReaderFactory.createXMLReader();
+//            xr.setContentHandler(new XmlReader());
+//            URL url = new URL("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=en");
+//            xr.parse(new InputSource(url.openStream()));
+//        }
+//        catch (SAXException | IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public static void main(String[] argv)
+    @Override
+    public void run()
     {
         try
         {
+            System.out.println("VI ER I CURRENCY TRÅDEN, tid = :"+System.currentTimeMillis());
             XMLReader xr = XMLReaderFactory.createXMLReader();
             xr.setContentHandler(new XmlReader());
             URL url = new URL("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=en");
