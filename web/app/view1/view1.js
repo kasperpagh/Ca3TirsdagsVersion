@@ -23,7 +23,7 @@ angular.module('myApp.view1', ['ngRoute'])
                     this.dataToSend = angular.toJson(this.data, true);
                     console.log(this.dataToSend);
 
-                    $http.post("/SemesterSeed/api/demouser", this.dataToSend).success(function (data)
+                    $http.post("/SemesterSeed/api/createuser", this.dataToSend).success(function (data)
                     {
                         console.log("Du er nu oprettet!");
                         $scope.youAreAUser = true;
