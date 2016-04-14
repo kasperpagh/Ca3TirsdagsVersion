@@ -13,32 +13,37 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author kaspe
  */
 @Entity
+@XmlRootElement
+@NamedQuery(name="ExchangeRates.findByDate", query="SELECT e FROM ExchangeRates e where e.dato = :dato") 
 public class ExchangeRates implements Serializable
 {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String dato;
-    private String rerfcur;
+    private String refcur;
     @OneToMany(cascade = CascadeType.ALL)
     private List<SingleExchangeRate> rates;
     
 
-    public Long getId()
+    public Integer getId()
     {
         return id;
     }
 
-    public void setId(Long id)
+    public void setId(Integer id)
     {
         this.id = id;
     }
@@ -47,7 +52,7 @@ public class ExchangeRates implements Serializable
     {
 
         this.dato = dato;
-        this.rerfcur = rerfcur;
+        this.refcur = rerfcur;
         this.rates = rates;
     }
 
@@ -88,16 +93,17 @@ public class ExchangeRates implements Serializable
         this.dato = dato;
     }
 
-    public String getRerfcur()
+    public String getRefcur()
     {
-        return rerfcur;
+        return refcur;
     }
 
-    public void setRerfcur(String rerfcur)
+    public void setRefcur(String refcur)
     {
-        this.rerfcur = rerfcur;
+        this.refcur = refcur;
     }
 
+    @XmlTransient
     public List<SingleExchangeRate> getRates()
     {
         return rates;

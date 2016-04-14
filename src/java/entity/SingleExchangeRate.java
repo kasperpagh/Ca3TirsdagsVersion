@@ -14,12 +14,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author kaspe
  */
 @Entity
+@XmlRootElement
 public class SingleExchangeRate implements Serializable
 {
     private static final long serialVersionUID = 1L;
@@ -27,7 +29,7 @@ public class SingleExchangeRate implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String currencyCode;
-    private String desv;
+    private String description;
     private String rate;
 
 
@@ -40,7 +42,7 @@ public class SingleExchangeRate implements Serializable
     public SingleExchangeRate(String currencyCode, String desv, String rate)
     {
         this.currencyCode = currencyCode;
-        this.desv = desv;
+        this.description = desv;
         this.rate = rate;
     
     }
@@ -98,14 +100,14 @@ public class SingleExchangeRate implements Serializable
         this.currencyCode = currencyCode;
     }
 
-    public String getDesv()
+    public String getDesc()
     {
-        return desv;
+        return description;
     }
 
-    public void setDesv(String desv)
+    public void setDesc(String desv)
     {
-        this.desv = desv;
+        this.description = desv;
     }
 
     public String getRate()

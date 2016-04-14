@@ -6,14 +6,15 @@
 package facades;
 
 import entity.ExchangeRates;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,18 +23,35 @@ import javax.persistence.Persistence;
 public class CurrencyHandler
 {
 
-    static ExchangeRates dailyRates;
+    public static ExchangeRates dailyRates;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
 
     public void persistExchangeRates(ExchangeRates er)
     {
-        dailyRates = er;
+
         EntityManager em = emf.createEntityManager();
+        ExchangeRates temp;
         try
         {
+
             em.getTransaction().begin();
             em.persist(er);
             em.getTransaction().commit();
+            
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date dato = new Date();
+            String nowDato = dateFormat.format(dato);
+            System.out.println("");
+            Query query = em.createNamedQuery("ExchangeRates.findByDate", ExchangeRates.class);
+            
+//            temp = em.find(ExchangeRates.class, 1);
+            temp =  (ExchangeRates) query.setParameter("dato", nowDato).getSingleResult();
+            System.out.println("FIND: " + temp.toString());
+            if (temp != null)
+            {
+                dailyRates = temp;
+            }
+            System.out.println("her fra persist, dailyRates: " + dailyRates);
         }
         catch (Exception e)
         {
@@ -44,5 +62,10 @@ public class CurrencyHandler
         {
             em.close();
         }
+    }
+
+    public ExchangeRates getDailyExchangeRates()
+    {
+        return dailyRates;
     }
 }
