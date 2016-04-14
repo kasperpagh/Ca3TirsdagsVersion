@@ -16,26 +16,27 @@ app.controller('View3Ctrl', function ($scope, $http)
 
 
 
-          $http({
-            method: 'GET',
-            url: 'api/demouser'
-          }).then(function successCallback(res) {
-            $scope.data = res.data.message;
-          }, function errorCallback(res) {
-            $scope.error = res.status + ": "+ res.data.statusText;
-          });
+    $http({
+        method: 'GET',
+        url: 'api/demouser'
+    }).then(function successCallback(res) {
+        $scope.data = res.data.message;
+    }, function errorCallback(res) {
+        $scope.error = res.status + ": " + res.data.statusText;
+    });
 
     $scope.getfromapi = function () {
-        
 
 
-  
 
-        
+
+
+
         $http({method: 'GET', url: 'http://cvrapi.dk/api?' + $('#searchbyvalue').val() + '= + ' + $('#searchcriteria').val() + ' + "&country=' + $('#searchbycountry').val(),
             skipAuthorization: true})
                 .then(function (response) {
-
+                    $scope.firmName = response.data.name;
+                    $scope.firm = response.data;
                     $scope.productionunits = response.data.productionunits;
 
 
@@ -43,7 +44,7 @@ app.controller('View3Ctrl', function ($scope, $http)
                 });
     };
 
-    $scope.search = function()
+    $scope.search = function ()
     {
         $scope.getfromapi();
     };
@@ -57,15 +58,15 @@ app.controller('View3Ctrl', function ($scope, $http)
 app.filter('myFilter', function () {
 
     return function (obj) {
-            var a = {};
-        angular.forEach(obj, function(value, key) {
+        var a = {};
+        angular.forEach(obj, function (value, key) {
             if (key !== "productionunits") {
                 a[key] = value;
             }
-            });
-            return a;
-         
-         
+        });
+        return a;
+
+
     };
 });
 
