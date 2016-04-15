@@ -43,9 +43,10 @@ public class CurrencyHandler
             String nowDato = dateFormat.format(dato);
             System.out.println("");
             Query query = em.createNamedQuery("ExchangeRates.findByDate", ExchangeRates.class);
+            System.out.println("her er dato: " + nowDato);
             
 //            temp = em.find(ExchangeRates.class, 1);
-            temp =  (ExchangeRates) query.setParameter("dato", nowDato).getSingleResult();
+            temp =  (ExchangeRates) query.setParameter("dato", "2016-04-14").getSingleResult();
             System.out.println("FIND: " + temp.toString());
             if (temp != null)
             {
