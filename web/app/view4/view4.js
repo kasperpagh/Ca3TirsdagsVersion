@@ -10,6 +10,14 @@ var app = angular.module('myApp.view4', ['ngRoute'])
             }]);
 
 app.controller('view4Control', ['$scope', "$http", function ($scope, $http) {
+        $http({
+            method: 'GET',
+            url: 'api/demouser'
+        }).then(function successCallback(res) {
+            $scope.data = res.data.message;
+        }, function errorCallback(res) {
+            $scope.error = res.status + ": " + res.data.statusText;
+        });
         $scope.linket = "/SemesterSeed/api/currency/dailyrates";
         console.log("asf");
         $scope.rates = [];
@@ -34,7 +42,7 @@ app.controller('view4Control', ['$scope', "$http", function ($scope, $http) {
             $scope.amount = $("#amountToConvert").val();
             $scope.fromCur = $("#curFrom").val();
             $scope.toCur = $("#curTo").val();
-            $scope.convoUrl = "/SemesterSeed/api/currency/calculator/" + $scope.amount +"/"+$scope.fromCur+"/"+$scope.toCur;
+            $scope.convoUrl = "/SemesterSeed/api/currency/calculator/" + $scope.amount + "/" + $scope.fromCur + "/" + $scope.toCur;
             console.log($scope.convoUrl);
             $http(
                     {

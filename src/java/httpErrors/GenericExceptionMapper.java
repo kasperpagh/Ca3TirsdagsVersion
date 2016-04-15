@@ -29,7 +29,7 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
     int statusCode = 500;
     errorDetail.addProperty("code", statusCode);
 
-    errorDetail.addProperty("message", "Unable to make new user with those values");
+    errorDetail.addProperty("message", "Unable to make new user with those values: " +ex.getMessage());
 
     error.add("error", errorDetail);
     return Response.status(statusCode).entity(gson.toJson(error)).type(MediaType.APPLICATION_JSON).build();

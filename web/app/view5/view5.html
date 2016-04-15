@@ -1,14 +1,18 @@
-      <div ng-controller="apictrl">
-         
-           <table class="table table-striped" style="width: 80%">
+<div ng-controller="View5Ctrl">
+
+    <table class="table table-striped" style="width: 80%">
         <tr>
-
-
-            <th ng-repeat="x in productionunits">{{x.name}}</th>
-            
+            <th>
+                User Name
+            </th>
         </tr>
- </table></div>   
+        <tr ng-repeat="x in usersForList">
+            <td>{{x.userName}} <button style="float: right" ng-click="delUsr(x.userName)">Delete User</button> </td>
+        
+        </tr>
+    </table>
+</div>   
 
-          
-      
+
+
 
