@@ -1,4 +1,6 @@
-    package httpErrors;
+
+package httpErrors;
+
 
 
 import javax.ws.rs.NotFoundException;
@@ -26,7 +28,9 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
     JsonObject errorDetail = new JsonObject();
     int statusCode = 500;
     errorDetail.addProperty("code", statusCode);
+
     errorDetail.addProperty("message", "Unable to make new user with those values");
+
     error.add("error", errorDetail);
     return Response.status(statusCode).entity(gson.toJson(error)).type(MediaType.APPLICATION_JSON).build();
   }

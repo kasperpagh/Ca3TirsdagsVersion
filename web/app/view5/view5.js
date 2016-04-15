@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('myApp.view5', ['ngRoute'])
+var app = angular.module('myApp.view5', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view5', {
     templateUrl: 'app/view5/view5.html'
   });
 }]);
+
 
 
 app.controller('View5Ctrl', function ($scope, $http)
@@ -22,3 +23,4 @@ app.controller('View5Ctrl', function ($scope, $http)
             $scope.error = res.status + ": "+ res.data.statusText;
           });
       });
+

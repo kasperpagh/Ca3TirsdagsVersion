@@ -24,12 +24,13 @@ public class ApplicationConfig extends Application {
     resources.add(httpErrors.GenericExceptionMapper.class);
     resources.add(httpErrors.NotFoundExceptionMapper.class);
     resources.add(rest.Admin.class);
-    resources.add(rest.User.class);
+        resources.add(rest.DailyExchangeRates.class);    
+                resources.add(rest.User.class);
     resources.add(rest.newuser.class);
-    resources.add(security.JWTAuthenticationFilter.class);
+        resources.add(security.JWTAuthenticationFilter.class);
     resources.add(security.Login.class);
-    resources.add(security.NotAuthorizedExceptionMapper.class);
-        resources.add(security.RolesAllowedFilter.class);
+        resources.add(security.NotAuthorizedExceptionMapper.class);
+    resources.add(security.RolesAllowedFilter.class);
   }
   
 }

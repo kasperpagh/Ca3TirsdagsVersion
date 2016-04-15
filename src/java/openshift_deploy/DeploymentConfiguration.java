@@ -17,6 +17,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.ws.rs.core.Context;
 import security.PasswordStorage;
+import xml.XmlReader;
 
 @WebListener
 public class DeploymentConfiguration implements ServletContextListener
@@ -26,6 +27,10 @@ public class DeploymentConfiguration implements ServletContextListener
     public static Role userRole = new Role("User");
     public static Role adminRole = new Role("Admin");
 
+//    public void firstRate()
+//    {
+//        new Thread(new XmlReader()).start();
+//    }
     @Override
     public void contextInitialized(ServletContextEvent sce)
     {
@@ -73,6 +78,7 @@ public class DeploymentConfiguration implements ServletContextListener
                 em.persist(admin);
                 em.persist(both);
                 em.getTransaction().commit();
+//                firstRate();
             }
             finally
             {
