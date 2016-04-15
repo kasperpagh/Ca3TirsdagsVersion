@@ -7,28 +7,20 @@ var app = angular.module('myApp.view5', ['ngRoute'])
     templateUrl: 'app/view5/view5.html'
   });
 }]);
-        app.controller('apictrl', function($scope, $http) {
-       
-        $http({
-        method : "GET",
-        skipAuthorization: true,
-        url : "http://cvrapi.dk/api?vat=3167%208021&country=dk",
-         headers: {
-   
-   'User-Agent' : "CVR API-CA3 SCHOOL Exercise-SEBASTIAN-cph-sr148@cphbusiness.dk"
-   
- }
-    }).then(function(response) {
-   
-    
-        $scope.members = response.data;
-        $scope.productionunits = response.data.productionunits;
-        $scope.heads = Object.keys($scope.members);
-        
-        /*
-        for(var i = 0; i <$scope.members.length; i++)
-        {
-        $scope.members2 = $scope.members[i];
-        } */
-    }); 
-});
+
+
+
+app.controller('View5Ctrl', function ($scope, $http)
+{
+
+
+          $http({
+            method: 'GET',
+            url: 'api/demoadmin'
+          }).then(function successCallback(res) {
+            $scope.data = res.data.message;
+          }, function errorCallback(res) {
+            $scope.error = res.status + ": "+ res.data.statusText;
+          });
+      });
+
