@@ -54,13 +54,14 @@ app.controller('View3Ctrl', function ($scope, $http)
 
 });
 
-
+//custom filter som sørger for at den key i obj som er = productionunits ikke kommer med. 
+//Dvs obj bliver taget ind, og keys med value lagt i et nyt object.
 app.filter('myFilter', function () {
 
     return function (obj) {
         var a = {};
         angular.forEach(obj, function (value, key) {
-            if (key !== "productionunits") {
+            if (key === "vat" || key === "name" || key === "address" || key === "zipcode" || key === "city") {
                 a[key] = value;
             }
         });

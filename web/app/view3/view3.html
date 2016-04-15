@@ -1,72 +1,73 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">   
 
 
-    
+
 
 <div ng-controller="View3Ctrl">
-    
-    
-    
-    
-    
+
+
+
+
+
     <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-            <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" id="searchcriteria" placeholder="Search for CVR" />
-                <div class="input-group-btn">
-                    <div  class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                  <div class="form-group">
-                                    <label for="filter">Search by</label>
-                                    <select id="searchbyvalue" class="form-control">
-                                        <option value="search" selected>Normal</option>
-                                        <option value="vat">CVR</option>
-                                        <option value="name">name</option>
-                                        <option value="produ">production unit</option>
-                                        <option value="phone">Phone Number</option>
-                                    </select>
-                                  </div>
- 
-                                  <div class="form-group">
-                                   <label for="contain">Contains the words</label>
-                                    <label for="filter">Region</label>
-                                    <select id="searchbycountry" class="form-control">
-                                        <option value="dk" selected>DK</option>
-                                        <option value="no">NO</option>
-                                    </select>
-                                  </div>
-                                  <button ng-click="search()" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                </form>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group" id="adv-search">
+                    <input type="text" class="form-control" id="searchcriteria" placeholder="Search for CVR" />
+                    <div class="input-group-btn">
+                        <div  class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="filter">Search by</label>
+                                            <select id="searchbyvalue" class="form-control">
+                                                <option value="search" selected>Normal</option>
+                                                <option value="vat">CVR</option>
+                                                <option value="name">name</option>
+                                                <option value="produ">production unit</option>
+                                                <option value="phone">Phone Number</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="contain">Contains the words</label>
+                                            <label for="filter">Region</label>
+                                            <select id="searchbycountry" class="form-control">
+                                                <option value="dk" selected>DK</option>
+                                                <option value="no">NO</option>
+                                            </select>
+                                        </div>
+                                        <button ng-click="search()" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </form>
+                                </div>
                             </div>
+                            <button type="button" ng-click="search()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                         </div>
-                        <button type="button" ng-click="search()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
-          </div>
         </div>
-	</div>
+    </div>
 
 
-   <div class="list-group" style="width: 350px; float: left; margin-top: 10px">
-            <a class="list-group-item active" >
-                <h4 class="list-group-item-heading" >{{firmName}}</h4>
-                <p class="list-group-item-text"  ng-repeat="(a, b) in firm| myFilter">{{a}}:{{b}}</p>
-            </a>
-        </div>
+    <div class="list-group" style="width: 350px; float: left; margin-top: 10px">
+        <a class="list-group-item active" >
+            <h4 class="list-group-item-heading" >{{firmName}}</h4>
+             <p class="list-group-item-text"  ng-repeat="(a, b) in firm| myFilter">{{a}}: {{b}}</p>
+
+        </a>
+    </div>
 
 
-<uib-accordion close-others="oneAtATime" >
+    <uib-accordion close-others="oneAtATime" >
 
         <uib-accordion-group heading="{{p.name}}"  ng-repeat="p in productionunits" style="width: 500px; margin-left: 365px; margin-top: 10px">
 
             <ul ng-repeat="(key, value) in p">
-                    {{key}} : {{value}} 
-               
+                {{key}}:{{value}} 
+
 
             </ul>
         </uib-accordion-group>
@@ -75,4 +76,4 @@
 
 
 
-    
+
