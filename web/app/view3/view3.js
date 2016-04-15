@@ -40,8 +40,10 @@ app.controller('View3Ctrl', function ($scope, $http)
                     $scope.productionunits = response.data.productionunits;
 
 
-
+                    
                 });
+                
+                
     };
 
     $scope.search = function ()
@@ -73,14 +75,3 @@ app.filter('myFilter', function () {
 });
 
 
-    app.filter('isEmpty', function () {
-        var b;
-        return function (obj) {
-            for (b in obj) {
-                if (obj.hasOwnProperty(b)) {
-                    return false;
-                }
-            }
-            return true;
-        };
-    });
