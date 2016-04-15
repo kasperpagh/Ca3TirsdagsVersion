@@ -46,6 +46,8 @@ public class CurrencyHandler
 //            System.out.println("her er dato: " + nowDato);
             Integer llama = Integer.parseInt(nowDato.substring(11, 13));
             System.out.println("Her er llama " + llama);
+            DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+            String now1Dato = dateFormat1.format(dato);
             if (llama >= 16)
             {
                 System.out.println("Jeg er størrer end 16");
@@ -53,7 +55,7 @@ public class CurrencyHandler
                 System.out.println("her er dato: " + nowDato);
 
 //            temp = em.find(ExchangeRates.class, 1);
-                temp = (ExchangeRates) query.setParameter("dato", nowDato).getSingleResult();
+                temp = (ExchangeRates) query.setParameter("dato", now1Dato).getSingleResult();
                 System.out.println("FIND: " + temp.toString());
                 if (temp != null)
                 {
