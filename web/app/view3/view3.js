@@ -61,7 +61,8 @@ app.filter('myFilter', function () {
     return function (obj) {
         var a = {};
         angular.forEach(obj, function (value, key) {
-            if (key === "vat" || key === "name" || key === "address" || key === "zipcode" || key === "city") {
+            if (key === "vat" || key === "name" || key === "address" || key === "zipcode" || key === "city" ||
+                    key === "startdate" || key === "enddate" || key === "employees") {
                 a[key] = value;
             }
         });
@@ -71,3 +72,15 @@ app.filter('myFilter', function () {
     };
 });
 
+
+    app.filter('isEmpty', function () {
+        var b;
+        return function (obj) {
+            for (b in obj) {
+                if (obj.hasOwnProperty(b)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+    });
