@@ -14,11 +14,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("demouser")
-@RolesAllowed({"User", "Admin"})
+@RolesAllowed("User")
 public class User
 {
 
-    
+    UserFacade uf = (UserFacade) security.UserFacadeFactory.getInstance();
     Gson gson;
 
     public User(Gson gson)
@@ -37,9 +37,18 @@ public class User
     {
         return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
     }
-    
-    
-  
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createUser(String jsonPerson)
+    {
+        JsonObject jsonIn = new JsonParser().parse(jsonPerson).getAsJsonObject();
+        String userName = jsonIn.get("username").getAsString();
+        String password = jsonIn.get("password").getAsString();
+        entity.User newUsr = new entity.User(userName, password);
 
+        uf.saveUser(newUsr);
+        System.out.println("Jeg er i createUser og jeg har lavet en person m. fields = " + newUsr.getPassword() + " og " + newUsr.getUserName());
+        
+    }
 }
