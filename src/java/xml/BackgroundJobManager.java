@@ -24,6 +24,7 @@ public class BackgroundJobManager implements ServletContextListener
         xr = new XmlReader();
 //        new Thread(xr).start();
         scheduler = Executors.newSingleThreadScheduledExecutor();
+        
         scheduler.scheduleAtFixedRate(new Thread(xr), 0, 24, TimeUnit.HOURS);
     }
 

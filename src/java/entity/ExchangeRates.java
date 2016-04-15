@@ -50,7 +50,6 @@ public class ExchangeRates implements Serializable
 
     public ExchangeRates(String dato, String rerfcur, List<SingleExchangeRate> rates)
     {
-
         this.dato = dato;
         this.refcur = rerfcur;
         this.rates = rates;

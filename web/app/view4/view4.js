@@ -21,10 +21,30 @@ app.controller('view4Control', ['$scope', "$http", function ($scope, $http) {
                 }
         ).then(function (response)
         {
-            
+
             $scope.rates = response.data.rates;
             console.log($scope.rates[1].currency);
             $scope.refcur = response.data.refcur;
             $scope.dato = response.data.dato;
         });
+
+        $scope.convert = function ()
+        {
+            console.log("i convo!");
+            $scope.amount = $("#amountToConvert").val();
+            $scope.fromCur = $("#curFrom").val();
+            $scope.toCur = $("#curTo").val();
+            $scope.convoUrl = "/SemesterSeed/api/currency/calculator/" + $scope.amount +"/"+$scope.fromCur+"/"+$scope.toCur;
+            console.log($scope.convoUrl);
+            $http(
+                    {
+                        method: "GET",
+                        skipAuthorization: true,
+                        url: $scope.convoUrl,
+                    }
+            ).then(function (response)
+            {
+                $("#convertRes").html("DU KAN FÅ: " + response.data + " " + $scope.toCur + ", FOR " + $scope.amount + " " + $scope.fromCur);
+            });
+        }
     }]);

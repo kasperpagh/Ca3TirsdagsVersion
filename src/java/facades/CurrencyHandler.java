@@ -24,6 +24,7 @@ public class CurrencyHandler
 {
 
     public static ExchangeRates dailyRates;
+    public 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
 
     public void persistExchangeRates(ExchangeRates er)
@@ -37,22 +38,33 @@ public class CurrencyHandler
             em.getTransaction().begin();
             em.persist(er);
             em.getTransaction().commit();
-            
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH");
+
             Date dato = new Date();
             String nowDato = dateFormat.format(dato);
-            System.out.println("");
-            Query query = em.createNamedQuery("ExchangeRates.findByDate", ExchangeRates.class);
-            System.out.println("her er dato: " + nowDato);
-            
-//            temp = em.find(ExchangeRates.class, 1);
-            temp =  (ExchangeRates) query.setParameter("dato", "2016-04-14").getSingleResult();
-            System.out.println("FIND: " + temp.toString());
-            if (temp != null)
+//            System.out.println("her er dato: " + nowDato);
+            Integer llama = Integer.parseInt(nowDato.substring(11, 13));
+            System.out.println("Her er llama " + llama);
+            if (llama >= 16)
             {
-                dailyRates = temp;
+                System.out.println("Jeg er størrer end 16");
+                Query query = em.createNamedQuery("ExchangeRates.findByDate", ExchangeRates.class);
+                System.out.println("her er dato: " + nowDato);
+
+//            temp = em.find(ExchangeRates.class, 1);
+                temp = (ExchangeRates) query.setParameter("dato", nowDato).getSingleResult();
+                System.out.println("FIND: " + temp.toString());
+                if (temp != null)
+                {
+                    dailyRates = temp;
+                }
+                System.out.println("her fra persist, dailyRates: " + dailyRates);
             }
-            System.out.println("her fra persist, dailyRates: " + dailyRates);
+            else
+            {
+                em.find(ExchangeRates.class, 1);
+            }
         }
         catch (Exception e)
         {
