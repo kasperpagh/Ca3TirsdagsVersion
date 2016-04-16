@@ -16,7 +16,6 @@ angular.module('myApp.view1', ['ngRoute'])
                 $scope.youAreAUser = false;
                 this.makeUser = function ()
                 {
-                    
                     this.userName = $("#desiredUsername").val();
                     this.passWord = $("#desiredPassword").val();
                     this.data = {username: this.userName, password: this.passWord};
@@ -31,5 +30,5 @@ angular.module('myApp.view1', ['ngRoute'])
                     {
                         $("#status").html("<h3>DER ER SKET EN FEJL, PRØV IGEN!</h3>");
                     });
-                };
-            }]);
+                    };
+        }]);

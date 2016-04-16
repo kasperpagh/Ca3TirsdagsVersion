@@ -12,6 +12,7 @@ var app = angular.module('myApp.view5', ['ngRoute'])
 
 app.controller('View5Ctrl', function ($scope, $http)
 {
+    
 
     $http({
         method: 'GET',
@@ -20,7 +21,10 @@ app.controller('View5Ctrl', function ($scope, $http)
         $scope.usersForList = [];
         $scope.usersForList = response.data;
 
-    });
+    }, function errorCallback(res) {
+            $scope.error = res.status + ": " + res.data.statusText;
+            window.location.href = '/SemesterSeed/#/view1';
+        });
 
     $scope.delUsr = function (userName)
     {

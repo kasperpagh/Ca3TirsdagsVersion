@@ -16,6 +16,7 @@ app.controller('View3Ctrl', function ($scope, $http)
     $scope.oneAtATime = true;
 
 
+   var loggedin = false;
 
     $http({
         method: 'GET',
@@ -24,6 +25,7 @@ app.controller('View3Ctrl', function ($scope, $http)
         $scope.data = res.data.message;
     }, function errorCallback(res) {
         $scope.error = res.status + ": " + res.data.statusText;
+        window.location.href = '/SemesterSeed/#/view1';
     });
 
     $scope.getfromapi = function () {
@@ -31,8 +33,7 @@ app.controller('View3Ctrl', function ($scope, $http)
 
 
 
-
-
+ 
         $http({method: 'GET', url: 'http://cvrapi.dk/api?' + $('#searchbyvalue').val() + '= + ' + $('#searchcriteria').val() + ' + "&country=' + $('#searchbycountry').val(),
             skipAuthorization: true})
                 .then(function (response) {
@@ -45,7 +46,7 @@ app.controller('View3Ctrl', function ($scope, $http)
                 });
                 
                 
-    };
+      };
 
     $scope.search = function ()
     {
