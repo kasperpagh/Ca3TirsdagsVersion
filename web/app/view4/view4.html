@@ -1,46 +1,48 @@
 <h1>Exchange Service</h1>
-<div class="container" ng-controller="view4Control">
-    <form role="form">
-        <div class="form-group">
-            <label for="curFrom">Select currency to convert from:</label>
-            <select class="form-control" id="curFrom">
-                <option ng-repeat="y in rates">{{y.currencyCode}}</option>
-            </select>
-            <br>
-            <p>Skriv her hvor mange penge du vil konvertere</p>
-            <input type="number" id="amountToConvert">
-            <br>
-            <br>
-            <label for="curTo">Select currency to convert to</label>
-            <select class="form-control" id="curTo">
-                <option ng-repeat="y in rates">{{y.currencyCode}}</option>
-            </select>
-            <button ng-click="convert()">Klik her for at regne</button>
-            <h4 id="convertRes"></h4>
-            
-        </div>
-    </form>
-</div>
+<div>
+    <div class="container">
+        <form role="form">
+            <div class="form-group">
+                <label for="curFrom">Select currency to convert from:</label>
+                <select class="form-control" id="curFrom">
+                    <option ng-repeat="y in rates">{{y.currencyCode}}</option>
+                </select>
+                <br>
+                <p>Skriv her hvor mange penge du vil konvertere</p>
+                <input type="number" id="amountToConvert">
+                <br>
+                <br>
+                <label for="curTo">Select currency to convert to</label>
+                <select class="form-control" id="curTo">
+                    <option ng-repeat="y in rates">{{y.currencyCode}}</option>
+                </select>
+                <button ng-click="convert()">Klik her for at regne</button>
+                <h4 id="convertRes"></h4>
 
-<div ng-controller="view4Control">
-    <h4>Refcur: {{refcur}} (100 DKK) ---- Date: {{dato}}</h4> 
-    <table class="table table-striped">
-        <tr>
-            <th>currency Code</th>
-            <th>description</th>
-            <th>rate</th>
-        </tr>
-        <tr ng-repeat="x in rates">
+            </div>
+        </form>
+    </div>
 
-            <td>
-                {{x.currencyCode}}
-            </td>
-            <td>
-                {{ x.description}}
-            </td>
-            <td>
-                {{ x.rate}}
-            </td>
-        </tr>
-    </table>
+    <div>
+        <h4>Refcur: {{refcur}} (100 DKK) ---- Date: {{dato}}</h4> 
+        <table class="table table-striped">
+            <tr>
+                <th>currency Code</th>
+                <th>description</th>
+                <th>rate</th>
+            </tr>
+            <tr ng-repeat="x in rates">
+
+                <td>
+                    {{x.currencyCode}}
+                </td>
+                <td>
+                    {{ x.description}}
+                </td>
+                <td>
+                    {{ x.rate}}
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

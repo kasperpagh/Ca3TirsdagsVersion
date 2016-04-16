@@ -5,6 +5,7 @@ var app = angular.module('myApp.view4', ['ngRoute'])
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/view4', {
                     templateUrl: 'app/view4/view4.html',
+                    //her tilføjes kontroller til view4.html :( derfor behøver vi ikke at sige <div ng-controller="johnWhatever">
                     controller: 'view4Control'
                 });
             }]);
@@ -24,12 +25,12 @@ app.controller('view4Control', ['$scope', "$http", function ($scope, $http) {
         $http(
                 {
                     method: "GET",
-                    skipAuthorization: true,
+//                    skipAuthorization: true,
                     url: $scope.linket,
                 }
         ).then(function (response)
         {
-
+            console.log("Jeg har lavet rest call her er data: !" + response.data);
             $scope.rates = response.data.rates;
             console.log($scope.rates[1].currency);
             $scope.refcur = response.data.refcur;
@@ -47,7 +48,7 @@ app.controller('view4Control', ['$scope', "$http", function ($scope, $http) {
             $http(
                     {
                         method: "GET",
-                        skipAuthorization: true,
+//                        skipAuthorization: true,
                         url: $scope.convoUrl,
                     }
             ).then(function (response)

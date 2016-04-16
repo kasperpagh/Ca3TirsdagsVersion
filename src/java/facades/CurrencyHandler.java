@@ -24,8 +24,7 @@ public class CurrencyHandler
 {
 
     public static ExchangeRates dailyRates;
-    public 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
 
     public void persistExchangeRates(ExchangeRates er)
     {
@@ -60,12 +59,14 @@ public class CurrencyHandler
                 if (temp != null)
                 {
                     dailyRates = temp;
+                    
                 }
                 System.out.println("her fra persist, dailyRates: " + dailyRates);
             }
             else
             {
-                em.find(ExchangeRates.class, 1);
+                System.out.println("Vi er i pers else");
+                 dailyRates = em.find(ExchangeRates.class, 1);
             }
         }
         catch (Exception e)
@@ -81,6 +82,21 @@ public class CurrencyHandler
 
     public ExchangeRates getDailyExchangeRates()
     {
-        return dailyRates;
+//        System.out.println("Her er dailyRates: " + dailyRates.toString());
+        EntityManager em = emf.createEntityManager();
+        try
+        {
+            em.getTransaction();
+            dailyRates = em.find(ExchangeRates.class, dailyRates.getId());
+            em.refresh(dailyRates);
+            em.getTransaction().commit();
+            return dailyRates;
+            
+        }
+        finally
+        {
+            em.close();
+        }
+
     }
 }
