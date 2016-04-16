@@ -52,7 +52,7 @@ public class Login {
         throw e;
       }
     }
-    throw new NotAuthorizedException("Invalid username or password. Please try again", Response.Status.UNAUTHORIZED);
+    throw new NotAuthorizedException("Invalid username or password", Response.Status.UNAUTHORIZED);
   }
 
   

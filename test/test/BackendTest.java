@@ -24,14 +24,14 @@ public class BackendTest {
     static Server server;
 
     public BackendTest() {
-        baseURI = "http://localhost:8084";
+        baseURI = "http://localhost:8085";
         defaultParser = Parser.JSON;
         basePath = "/api";
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        server = new Server(8084);
+        server = new Server(8085);
         ServletHolder servletHolder = new ServletHolder(org.glassfish.jersey.servlet.ServletContainer.class);
         servletHolder.setInitParameter("javax.ws.rs.Application", ApplicationConfig.class.getName());
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -57,7 +57,7 @@ public class BackendTest {
                 post("/login").
                 then().
                 statusCode(401).
-                body("error.message", equalTo("Ilegal username or password"));
+                body("error.message", equalTo("Invalid username or password"));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class BackendTest {
                 post("/login").
                 then().
                 statusCode(401).
-                body("error.message", equalTo("Ilegal username or password"));
+                body("error.message", equalTo("Invalid username or password"));
     }
 
     @Test
@@ -120,7 +120,7 @@ public class BackendTest {
                 contentType("application/json").
                 header("Authorization", "Bearer " + from(json).get("token")).
                 when().
-                get("/demoadmin").
+                get("/admin").
                 then().
                 statusCode(403).
                 body("error.message", equalTo("You are not authorized to perform the requested operation"));
