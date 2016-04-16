@@ -22,6 +22,7 @@ angular.module('myApp', [
             }])
 //.
         .config(function ($httpProvider) {
+            console.log("reached");
             $httpProvider.interceptors.push('AuthInterceptor');
         });
 

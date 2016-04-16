@@ -17,6 +17,7 @@ angular.module('myApp.view2', ['ngRoute'])
             $scope.data = res.data.message;
           }, function errorCallback(res) {
             $scope.error = res.status + ": "+ res.data.statusText;
+            window.location.href = '/SemesterSeed/#/view1';
           });
 
         });

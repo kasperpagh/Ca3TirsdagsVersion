@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
  * @author kaspe
  */
 @Path("currency")
-//@RolesAllowed("User")
+@RolesAllowed("User")
 public class DailyExchangeRates
 {
 
