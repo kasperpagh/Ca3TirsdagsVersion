@@ -6,11 +6,17 @@ import static com.jayway.restassured.RestAssured.defaultParser;
 import static com.jayway.restassured.RestAssured.given;
 import com.jayway.restassured.parsing.Parser;
 import static com.jayway.restassured.path.json.JsonPath.from;
+import entity.User;
+import facades.UserFacade;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import rest.ApplicationConfig;
@@ -22,8 +28,10 @@ import rest.ApplicationConfig;
 public class BackendTest {
 
     static Server server;
-
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
+    
     public BackendTest() {
+        //ændret til en url der ikke er den samme som tomcat -.-
         baseURI = "http://localhost:8085";
         defaultParser = Parser.JSON;
         basePath = "/api";
@@ -47,6 +55,16 @@ public class BackendTest {
         //waiting for all the server threads to terminate so we can exit gracefully
         server.join();
     }
+    
+    @Test
+    public void testDBFacade()
+    {
+        EntityManager em = emf.createEntityManager();
+        UserFacade uf = (UserFacade) security.UserFacadeFactory.getInstance();
+        User usr = new User("lol", "bob");
+        uf.saveUser(usr);
+        Assert.assertTrue(em.find(User.class, usr.getUserName()) != null);
+    }
 
     @Test
     public void LoginWrongUsername() {
@@ -57,7 +75,7 @@ public class BackendTest {
                 post("/login").
                 then().
                 statusCode(401).
-                body("error.message", equalTo("Invalid username or password"));
+                body("error.message", equalTo("Invalid username or password")); 
     }
 
     @Test

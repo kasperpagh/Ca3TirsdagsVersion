@@ -47,6 +47,15 @@ public class CurrencyHandler
             System.out.println("Her er llama " + llama);
             DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
             String now1Dato = dateFormat1.format(dato);
+            DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+            String now2Dato = dateFormat1.format(dato);
+            String s1 = now2Dato.substring(7, 9);
+            String s2 = now2Dato.substring(0, 7);
+            Integer i1 = Integer.parseInt(s1);
+            i1 -= 1;
+
+            now2Dato = s2 + i1.toString();
+
             if (llama >= 16)
             {
                 System.out.println("Jeg er størrer end 16");
@@ -59,14 +68,16 @@ public class CurrencyHandler
                 if (temp != null)
                 {
                     dailyRates = temp;
-                    
+
                 }
                 System.out.println("her fra persist, dailyRates: " + dailyRates);
             }
             else
             {
                 System.out.println("Vi er i pers else");
-                 dailyRates = em.find(ExchangeRates.class, 1);
+
+                Query query1 = em.createNamedQuery("ExchangeRates.findByDate", ExchangeRates.class);//em.find(ExchangeRates.class, 1);
+                dailyRates = (ExchangeRates) query1.setParameter("dato", now2Dato).getSingleResult();
             }
         }
         catch (Exception e)
@@ -91,7 +102,7 @@ public class CurrencyHandler
             em.refresh(dailyRates);
             em.getTransaction().commit();
             return dailyRates;
-            
+
         }
         finally
         {

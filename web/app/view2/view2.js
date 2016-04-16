@@ -20,4 +20,6 @@ angular.module('myApp.view2', ['ngRoute'])
             window.location.href = '/SemesterSeed/#/view1';
           });
 
+
+          
         });
