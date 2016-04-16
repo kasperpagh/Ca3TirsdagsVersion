@@ -11,6 +11,7 @@
         <div class="row">
 
             <div class="col-sm-10">
+
                 <h2>REST API</h2>
 
                 <p>We have our "CRUD" operations in the "RestService".
@@ -18,7 +19,73 @@
                     a simple collection of URIs, HTTP calls to those URIs and some JSON representations of resoursces, many of which contain
                     relational links. Each resouse has its own address or URI - every thing the server can provide is exposed as a resource.
                 </p><hr>
+                <h4>Logged in Users only allowed to use User API and Logged in Admin only able to Use Admin API</h4>
 
+
+
+
+
+
+                <table id="mainTable" class="table table-striped" style="width: 95%;">
+
+                    <tr>
+                        <th>METHOD & PATH</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                    <tr>    
+                        <td>
+                            <h3>GET</h3>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td class="td">api/admin/users </td>
+                        <td class="td">Returns an Array of all users with role User.</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="td">api/currency/dailyrates/</td>
+                        <td class="td">Returns an JSON representation of the data we get from http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=en   </td>
+                    </tr>
+                    <tr>
+                        <td class="td">api/currency/calculator/{amount}/{fromcurrency}/{tocurrency}</td>
+                        <td class="td">Returns amount*(fromRate/toRate)    </td>
+                    </tr>
+                    <tr>    
+                        <td>
+                            <h3>POST</h3>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td">api/createuser/createuser </td>
+                        <td class="td">Creates a new user if provided with a valid json object. A person may be created with firstName and Password like this:
+                            <b><br>
+                                {<br>
+                                "userName" : "Discofever", <br>
+                                "password"  : "123"<br>
+                                }<br>
+
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>    
+                        <td>
+                            <h3>DELETE</h3>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td">api/admin/user/{name} </td>
+                        <td class="td">Deletes a person with the given name Like this Url: */api/admin/user/{userName}
+                        </td>
+                    </tr>
+                </table>
+                <hr>
             </div>
 
 
@@ -37,21 +104,41 @@
             <div class="col-sm-10">
                 <h2>Test</h2>
                 <p>We tested our own (not login part) by using postman. Here's some pics</p>
-                
-                <p>Our tests focus on our database facade of the test of common CRUD operations. This tests our facade connected to our database and our facade receives data from the database </p>                   
+                <img src="http://s30.postimg.org/4iyjscvj4/image.jpg" alt="asdf" style="width: 98%; height: 98%"/>
+                <br>
+                <b>Her ses en POST kald for at lave en user, samt useren i databasen!</b>
+                <br>
+                <img src="http://s23.postimg.org/vccoil8cp/image.jpg" alt="asdf" style="width: 98%; height: 98%"/>
+                <br>
+                <b>Her ses en DELETE kald for at fjerne en user, samt databasen uden useren!</b>
+                <br>
+                <img src="http://s24.postimg.org/bo0f8f0ed/image.jpg" alt="asdf" style="width: 98%; height: 98%"/>
+                <br>
+                <b>Samme som ovenstående, uden auth</b>
+                <br>
+                <img src="http://s24.postimg.org/f1d98vjd1/image.jpg" alt="asdf" style="width: 98%; height: 98%"/>
+                <br>
+                <b>Get all users på databasen (testUser)</b>
+                <br>              
+                <img src="http://s24.postimg.org/3u90ei7cz/test_REAL.png" alt="asdf" style="width: 98%; height: 98%"/>
+                <br>
+                <b>Arbitrært billede af en grøn bar der kunne dække over hvilken som helst test</b>                   
             </div>
 
             <div class="col-sm-10">
                 <h2>Who did what?</h2>
                 <ul>
-                    <li>1-Setting up the Project Architecture: Was done by all of us together, since we had quite a bit of trouble even getting the project to work in the first place</li>
-                    <li>2-Using Open Data, AngularJS and Cool Controls: Made by Steffen, Sebastian og Kasper</li>
+                    <li>1 Setting up the Project Architecture: Was done by all of us together, since we had quite a bit of trouble even getting the project to work in the first place</li>
+                    <li>2 Using Open Data, AngularJS and Cool Controls: Made by Steffen, Sebastian og Kasper</li>
                     <li>3 More Open Data (this time provided as XML): Made by Kasper</li>
                     <li>4 The Admin (All Users) Page: Made by Steffen, Sebastian, Kasper </li>
                     <li>5 Testing the Application: Made by Steffen & Kasper </li>
                     <li>6 Complete the Documentation Page(s) and upload all to OPENSHFT: Made by Iman</li>
 
                 </ul>
+                <h3>
+                    We suggest that everyone get the full amount of studypoints.
+                </h3>
             </div>
 
         </div>
