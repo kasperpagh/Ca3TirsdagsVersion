@@ -22,7 +22,7 @@ app.controller('View5Ctrl', function ($scope, $http)
     }, function errorCallback(res) {
         $scope.error = res.status + ": " + res.data.statusText;
     });
-    
+
     $http({
         method: 'GET',
         url: 'api/admin/users'
@@ -39,7 +39,7 @@ app.controller('View5Ctrl', function ($scope, $http)
             url: 'api/admin/user/' + userName
         }).then(function (response) {
 
-            console.log("du har trykket del");
+            location.reload(true);
         });
     };
 

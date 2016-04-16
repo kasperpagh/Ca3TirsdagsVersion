@@ -11,38 +11,46 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USERROLE")
-public class Role implements Serializable {
-  
-  @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private List<User> users = new ArrayList();
+@Table(name = "USERROLE")
+public class Role implements Serializable
+{
 
-    public List<User> getUsers() {
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    private final List<User> users;
+
+    public List<User> getUsers()
+    {
         return users;
     }
-  
-  private static final long serialVersionUID = 1L;
-  @Id
-  private String roleName ;
 
-  public Role(String roleName) {
-    this.roleName = roleName;
-  }
+    private static final long serialVersionUID = 1L;
+    @Id
+    private String roleName;
 
-  public Role() {
-  }
-  
-  public void addUser(User user){
-    users.add(user);
-  }
+    public Role(String roleName)
+    {
+        this.users = new ArrayList();
+        this.roleName = roleName;
+    }
 
+    public Role()
+    {
+        this.users = new ArrayList();
+    }
 
-  public String getRoleName() {
-    return roleName;
-  }
+    public void addUser(User user)
+    {
+        users.add(user);
+    }
 
-  public void setRoleName(String roleName) {
-    this.roleName = roleName;
-  }
-  
+    public String getRoleName()
+    {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName)
+    {
+        this.roleName = roleName;
+    }
+
 }

@@ -131,7 +131,12 @@ public class UserFacade implements IUserFacade
         {
             em.getTransaction().begin();
             entity.Role rolle = em.find(entity.Role.class, DeploymentConfiguration.userRole.getRoleName());
+            em.refresh(rolle);
             System.out.println("Her er list: " + rolle.getUsers().toString());
+            for (entity.User u : rolle.getUsers())
+            {
+                System.out.println("her er navne fra list: " + u.getUserName());
+            }
             em.getTransaction().commit();
             System.out.println("Her er rolle: " + rolle.toString());
             
