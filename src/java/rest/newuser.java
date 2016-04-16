@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 /**
  *
  * @author dino
+ * 
  */
 
 @Path("createuser")
@@ -31,7 +32,6 @@ public class newuser {
         String userName = jsonIn.get("username").getAsString();
         String password = jsonIn.get("password").getAsString();
         entity.User newUsr = new entity.User(userName, password);
-
         uf.saveUser(newUsr);
         System.out.println("Jeg er i createUser og jeg har lavet en person m. fields = " + newUsr.getPassword() + " og " + newUsr.getUserName());
         
