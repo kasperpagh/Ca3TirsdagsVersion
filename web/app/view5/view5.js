@@ -13,16 +13,6 @@ var app = angular.module('myApp.view5', ['ngRoute'])
 app.controller('View5Ctrl', function ($scope, $http)
 {
 
-
-    $http({
-        method: 'GET',
-        url: 'api/admin'
-    }).then(function successCallback(res) {
-        $scope.data = res.data.message;
-    }, function errorCallback(res) {
-        $scope.error = res.status + ": " + res.data.statusText;
-    });
-
     $http({
         method: 'GET',
         url: 'api/admin/users'

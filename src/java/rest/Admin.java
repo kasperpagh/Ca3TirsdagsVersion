@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 import openshift_deploy.DeploymentConfiguration;
 
 @Path("admin")
-//@RolesAllowed("Admin")
+@RolesAllowed("Admin")
 public class Admin
 {
 
