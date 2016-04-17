@@ -42,6 +42,7 @@ public class CurrencyHandler
             dailyRates = er;
             em.getTransaction().commit();
 
+
 //            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH");
 //
 //            Date dato = new Date();
@@ -84,6 +85,7 @@ public class CurrencyHandler
 //                dailyRates = (ExchangeRates) query1.setParameter("dato", now2Dato).getSingleResult();
 //            }
         }
+        
         catch (Exception e)
         {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
