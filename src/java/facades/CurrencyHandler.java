@@ -64,17 +64,17 @@ public class CurrencyHandler
 
 //            temp = em.find(ExchangeRates.class, 1);
                 temp = (ExchangeRates) query.setParameter("dato", now1Dato).getSingleResult();
-                System.out.println("FIND: " + temp.toString());
+//                System.out.println("FIND: " + temp.toString());
                 if (temp != null)
                 {
                     dailyRates = temp;
 
                 }
-                System.out.println("her fra persist, dailyRates: " + dailyRates);
+//                System.out.println("her fra persist, dailyRates: " + dailyRates);
             }
             else
             {
-                System.out.println("Vi er i pers else");
+//                System.out.println("Vi er i pers else");
 
                 Query query1 = em.createNamedQuery("ExchangeRates.findByDate", ExchangeRates.class);//em.find(ExchangeRates.class, 1);
                 dailyRates = (ExchangeRates) query1.setParameter("dato", now2Dato).getSingleResult();
