@@ -25,7 +25,7 @@ public class CurrencyHandler
 {
 
     public static ExchangeRates dailyRates;
-    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_OPENSHIFT");
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory(vi);
 
     public void persistExchangeRates(ExchangeRates er)
     {
@@ -101,7 +101,7 @@ public class CurrencyHandler
         EntityManager em = emf.createEntityManager();
         try
         {
-            em.getTransaction();
+            em.getTransaction().begin();
             dailyRates = em.find(ExchangeRates.class, dailyRates.getId());
             em.refresh(dailyRates);
             em.getTransaction().commit();

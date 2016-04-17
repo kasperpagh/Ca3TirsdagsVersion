@@ -6,6 +6,8 @@
 package xml;
 
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,8 +19,12 @@ public class TimerStarter extends TimerTask
     @Override
     public void run()
     {
-        new Thread(new XmlReader()).start();
-    }
 
+        Thread t1 = new Thread(new XmlReader());
+
+        
+        t1.start();
+
+    }
 
 }

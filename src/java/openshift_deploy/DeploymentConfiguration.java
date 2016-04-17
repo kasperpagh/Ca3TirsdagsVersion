@@ -26,10 +26,10 @@ public class DeploymentConfiguration implements ServletContextListener
     public static String PU_NAME = "PU-Local";
     public static Role userRole = new Role("User");
     public static Role adminRole = new Role("Admin");
-    
-    private ScheduledExecutorService scheduler;
-    Timer timer = new Timer();
-    private XmlReader xr;
+//    
+//    private ScheduledExecutorService scheduler;
+//    Timer timer = new Timer();
+//    private XmlReader xr;
 
 //    public void firstRate()
 //    {
@@ -50,8 +50,9 @@ public class DeploymentConfiguration implements ServletContextListener
         {
             PU_NAME = "PU_OPENSHIFT";
         }
+        new Thread(new TimerStarter()).start();
         
-         timer.scheduleAtFixedRate(new TimerStarter(), 0, 86400000);
+//         timer.scheduleAtFixedRate(new TimerStarter(), 0, 86400000);
        
 //        scheduler = Executors.newSingleThreadScheduledExecutor();
 //        scheduler.scheduleAtFixedRate(new Thread(xr), 0, 24, TimeUnit.HOURS);
