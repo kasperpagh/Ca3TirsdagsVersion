@@ -2,10 +2,10 @@ package openshift_deploy;
 
 import entity.Role;
 import entity.User;
-import facades.UserFacade;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -15,8 +15,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.ws.rs.core.Context;
 import security.PasswordStorage;
+import xml.TimerStarter;
 import xml.XmlReader;
 
 @WebListener
@@ -26,6 +26,10 @@ public class DeploymentConfiguration implements ServletContextListener
     public static String PU_NAME = "PU-Local";
     public static Role userRole = new Role("User");
     public static Role adminRole = new Role("Admin");
+    
+    private ScheduledExecutorService scheduler;
+    Timer timer = new Timer();
+    private XmlReader xr;
 
 //    public void firstRate()
 //    {
@@ -34,6 +38,7 @@ public class DeploymentConfiguration implements ServletContextListener
     @Override
     public void contextInitialized(ServletContextEvent sce)
     {
+        
 //        If we are testing, then this:
         if (sce.getServletContext().getInitParameter("testEnv") != null)
         {
@@ -45,6 +50,15 @@ public class DeploymentConfiguration implements ServletContextListener
         {
             PU_NAME = "PU_OPENSHIFT";
         }
+        
+         timer.scheduleAtFixedRate(new TimerStarter(), 0, 86400000);
+       
+//        scheduler = Executors.newSingleThreadScheduledExecutor();
+//        scheduler.scheduleAtFixedRate(new Thread(xr), 0, 24, TimeUnit.HOURS);
+        
+        
+        
+        
         try
         {
             ServletContext context = sce.getServletContext();
@@ -58,7 +72,6 @@ public class DeploymentConfiguration implements ServletContextListener
             {
                 return;
             }
-      
 
             User user = new User("user", PasswordStorage.createHash("test"));
             User admin = new User("admin", PasswordStorage.createHash("test"));
@@ -67,6 +80,8 @@ public class DeploymentConfiguration implements ServletContextListener
             admin.AddRole(adminRole);
             both.AddRole(userRole);
             both.AddRole(adminRole);
+            
+            
 
             try
             {
@@ -95,5 +110,6 @@ public class DeploymentConfiguration implements ServletContextListener
     @Override
     public void contextDestroyed(ServletContextEvent sce)
     {
+//        scheduler.shutdownNow();
     }
 }

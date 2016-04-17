@@ -37,6 +37,7 @@ public class XmlReader extends DefaultHandler implements Runnable
     {
 //        System.out.println("HER ER SER:" + serList.toString() + "HER ER dato:" + dato);
         er = new ExchangeRates(dato, refcur, serList);
+        facades.CurrencyHandler.dailyRates = er;
         hand.persistExchangeRates(er);
         System.out.println("End Document (Sax-event)");
     }
