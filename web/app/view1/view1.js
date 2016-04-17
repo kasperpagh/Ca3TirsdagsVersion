@@ -13,6 +13,8 @@ angular.module('myApp.view1', ['ngRoute'])
         .controller('View1Ctrl',  ["InfoFactory", "InfoService","$http", "$scope", function (InfoFactory, InfoService,$http,$scope) {
                 this.msgFromFactory = InfoFactory.getInfo();
                 this.msgFromService = InfoService.getInfo();
+                
+                
                 $scope.youAreAUser = false;
                 this.makeUser = function ()
                 {

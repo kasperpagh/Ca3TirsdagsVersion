@@ -9,13 +9,18 @@ import org.xml.sax.helpers.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import openshift_deploy.DeploymentConfiguration;
 
 public class XmlReader extends DefaultHandler implements Runnable
 {
 
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_OPENSHIFT");
     private ExchangeRates er;
     private List<SingleExchangeRate> serList = new ArrayList();
-    ;
+
     private String refcur = "DKK";
     private String dato;
     private final CurrencyHandler hand = new CurrencyHandler();
@@ -37,6 +42,7 @@ public class XmlReader extends DefaultHandler implements Runnable
     {
 //        System.out.println("HER ER SER:" + serList.toString() + "HER ER dato:" + dato);
         er = new ExchangeRates(dato, refcur, serList);
+        facades.CurrencyHandler.dailyRates = er;
         hand.persistExchangeRates(er);
         System.out.println("End Document (Sax-event)");
     }
@@ -48,7 +54,7 @@ public class XmlReader extends DefaultHandler implements Runnable
 //        System.out.print("Element: " + localName + ": ");
         for (int i = 0; i < attributes.getLength(); i++)
         {
-    
+
             if (attributes.getLocalName(i).equalsIgnoreCase("id"))
             {
 //                System.out.println("jeg er i dato");
@@ -72,7 +78,7 @@ public class XmlReader extends DefaultHandler implements Runnable
             }
             if (attributes.getLocalName(i).equalsIgnoreCase("rate"))
             {
-                
+
                 ser.setRate(attributes.getValue(i));
             }
         }
@@ -88,11 +94,18 @@ public class XmlReader extends DefaultHandler implements Runnable
     {
         try
         {
+            EntityManager em = emf.createEntityManager();
             System.out.println("VI ER I CURRENCY TRÅDEN, tid = :" + System.currentTimeMillis());
             XMLReader xr = XMLReaderFactory.createXMLReader();
             xr.setContentHandler(new XmlReader());
             URL url = new URL("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=en");
             xr.parse(new InputSource(url.openStream()));
+            
+//            em.getTransaction().begin();
+//            em.persist(er);
+//            
+//            facades.CurrencyHandler.dailyRates = er;
+//            em.getTransaction().commit();
         }
         catch (SAXException | IOException e)
         {
