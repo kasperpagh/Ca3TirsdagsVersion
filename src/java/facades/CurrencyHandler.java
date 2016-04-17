@@ -25,7 +25,7 @@ public class CurrencyHandler
 {
 
     public static ExchangeRates dailyRates;
-    public EntityManagerFactory emf = Persistence.createEntityManagerFactory(vi);
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
     public void persistExchangeRates(ExchangeRates er)
     {
