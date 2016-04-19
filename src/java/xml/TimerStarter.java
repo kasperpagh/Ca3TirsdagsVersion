@@ -20,10 +20,22 @@ public class TimerStarter extends TimerTask
     public void run()
     {
 
-        Thread t1 = new Thread(new XmlReader());
+        while (true)
+        {
+            Thread t1 = new Thread(new XmlReader());
+            t1.start();
+            
+            try
+            {
+                t1.wait(86400000);
+            }
+            catch (InterruptedException ex)
+            {
+                new Thread(new TimerStarter()).start();
+            }
+        }
 
         
-        t1.start();
 
     }
 
